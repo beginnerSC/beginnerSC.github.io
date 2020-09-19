@@ -3,9 +3,10 @@
 <TITLE>Login page</TITLE>
 </HEAD>
 <body bgcolor="#e7e7e7">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-
-
 
 function Launch()
 {
@@ -13,7 +14,11 @@ function Launch()
 	var sandbox = "sandbox-stable";
 
 	var repoName= document.isForm.repoName.value;
-	var token = document.isForm.token.value;
+	var password = document.isForm.password.value;
+	
+	// token is encrypted like this: CryptoJS.AES.encrypt(MY_TOKEN, MY_PASSWORD);
+
+	var token = CryptoJS.AES.decrypt("U2FsdGVkX1/3oBBZJXnAVzFm0dbx2aUrpReU1i3v1iSPqgtlaxz+7EqfuIGFu9SQLMepQZnmOd4XZXy0Atp0Qw==", password);
 
 	var url = "https://mybinder.org/v2/gh/" 
 		+ id + "/" + sandbox 
@@ -38,8 +43,8 @@ function Launch()
 <td><input name="repoName" value=""></td>
 </tr>
 <tr>
-<td>Token</td>
-<td><input name="token" value=""></td>
+<td>Password</td>
+<td><input name="password" value=""></td>
 </tr>
 </table>						
 
