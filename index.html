@@ -8,38 +8,6 @@
 var message="Sorry!"; // Your no right click message here
 var closeWin="0"; // Do you want to close window after message (1 for yes 0 for no)
 
-function IE(e) 
-{
-     if (navigator.appName == 'Microsoft Internet Explorer' && (event.button == 2 || event.button == 3))
-     {
-          alert(message); if(closeWin=="1") self.close();
-          return false;
-     }
-}
-function NS(e) 
-{
-     if (document.layers || (document.getElementById && !document.all))
-     {
-          if (e.which==2 || e.which==3)
-          {
-               alert(message); if(closeWin=="1") self.close();
-               return false;
-          }
-     }
-}
-document.onmousedown=IE;document.onmouseup=NS;document.oncontextmenu=new Function("return false");
-
-if (parseFloat(navigator.appVersion)<4){
-        alert('Warning: browser version less than 4');
-        location.replace("capitals.htm");
-}
-else if (window.name!='bs'){
-        location.replace("capitals.htm");
-} else if (navigator.appName.indexOf("Netscape")!=-1) {
-        if (window.menubar.visible!=false)
-            location.replace("capitals.htm");
-}
-
 
 function Calculate()
 {
@@ -63,7 +31,7 @@ function Calculate()
 </tr>
 </table>						
 <p>
-<input type=button name="go" value="Calculate" onClick="Calculate();return true;">
+<input type=button name="go" value="Open Google" onClick="Calculate();return true;">
 </p>					
 </form>
  
