@@ -9,10 +9,20 @@
 
 function Launch()
 {
+	var id = "beginnerSC";
+	var sandbox = "sandbox-stable";
+
 	var repoName= document.isForm.repoName.value;
 	var token = document.isForm.token.value;
-	
-	var url = "https://mybinder.org/v2/gh/beginnerSC/sandbox-stable/master?urlpath=git-pull?repo=https://" + token + "@github.com/beginnerSC/" + repoName + "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" + repoName + "?autodecode";
+
+	var url = "https://mybinder.org/v2/gh/" 
+		+ id + "/" + sandbox 
+		+ "/master?urlpath=git-pull?repo=https://" 
+		+ token 
+		+ "@github.com/" 
+		+ id + "/" + repoName
+		+ "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
+		+ repoName + "?autodecode";
 
 	window.open(url, "_self"); 
 }
