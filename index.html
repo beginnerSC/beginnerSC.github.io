@@ -1,23 +1,72 @@
- <form action="action_page.php" method="post">
-  <div class="imgcontainer">
-    <img src="img_avatar2.png" alt="Avatar" class="avatar">
-  </div>
+<html>
+<HEAD>
+<TITLE>Black-Scholes-Merton Formula for Option Pricing</TITLE>
+</HEAD>
+<body bgcolor="#e7e7e7">
+<script type="text/javascript">
 
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+var message="Sorry!"; // Your no right click message here
+var closeWin="0"; // Do you want to close window after message (1 for yes 0 for no)
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+function IE(e) 
+{
+     if (navigator.appName == 'Microsoft Internet Explorer' && (event.button == 2 || event.button == 3))
+     {
+          alert(message); if(closeWin=="1") self.close();
+          return false;
+     }
+}
+function NS(e) 
+{
+     if (document.layers || (document.getElementById && !document.all))
+     {
+          if (e.which==2 || e.which==3)
+          {
+               alert(message); if(closeWin=="1") self.close();
+               return false;
+          }
+     }
+}
+document.onmousedown=IE;document.onmouseup=NS;document.oncontextmenu=new Function("return false");
 
-    <button type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
+if (parseFloat(navigator.appVersion)<4){
+        alert('Warning: browser version less than 4');
+        location.replace("capitals.htm");
+}
+else if (window.name!='bs'){
+        location.replace("capitals.htm");
+} else if (navigator.appName.indexOf("Netscape")!=-1) {
+        if (window.menubar.visible!=false)
+            location.replace("capitals.htm");
+}
 
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
-</form> 
+
+function Calculate()
+{
+	window.open("https://www.google.com"); 
+}
+</script>
+<center>
+<form name="isForm">
+<p><B>Black-Scholes-Merton formula</B></p>
+</p>
+<table border=0>
+<tr>
+<td>Volatility (annual)</td>
+<td><input name="isV" value="20"></td>
+<td>%</td>
+</tr>
+<tr>
+<td>Strike price</td>
+<td><input name="isX" value="50"></td>
+<td>dollars</td>
+</tr>
+</table>						
+<p>
+<input type=button name="go" value="Calculate" onClick="Calculate();return true;">
+</p>					
+</form>
+ 
+</center>
+</body>
+</html>
