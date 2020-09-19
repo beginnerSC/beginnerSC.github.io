@@ -5,36 +5,39 @@
 <body bgcolor="#e7e7e7">
 <script type="text/javascript">
 
-var message="Sorry!"; // Your no right click message here
-var closeWin="0"; // Do you want to close window after message (1 for yes 0 for no)
 
 
 function Launch()
 {
-//	var repoName = eval(document.isForm.repoName.value);
-//	var token = eval(document.isForm.token.value);
+	var repoName= document.isForm.repoName.value;
+	var token = document.isForm.token.value;
+	
+	var url = "https://mybinder.org/v2/gh/beginnerSC/sandbox-stable/master?urlpath=git-pull?repo=https://" + token + "@github.com/beginnerSC/" + repoName + "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" + repoName + "?autodecode";
 
-	window.open("https://www.google.com", "_self"); 
+	window.open(url, "_self"); 
 }
 </script>
 <center>
+
 <form name="isForm">
-<p><B>Launching Project in JupyterLab</B></p>
-</p>
+<p><B>Launch Project in Workspace</B></p>
+
 <table border=0>
 <tr>
 <td>Repository name</td>
-<td><input name="repoName"></td>
+<td><input name="repoName" value=""></td>
 </tr>
 <tr>
 <td>Token</td>
-<td><input name="token"></td>
+<td><input name="token" value=""></td>
 </tr>
 </table>						
+
 <p>
 <input type=button name="go" value="Launch" onClick="Launch();return true;">
 </p>					
 </form>
+
  
 </center>
 </body>
