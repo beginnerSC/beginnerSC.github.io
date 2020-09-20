@@ -24,7 +24,8 @@ function Launch()
 			+ id + "/" + sandbox + 
 			"/master?urlpath=git-pull?repo=https://github.com/" 
 			+ id + "/" + repoName + 
-			"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/misc?Fautodecode";
+			"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/"
+			+ repoName + "?autodecode";
 	} 
 	else if (repoType=="Private")
 	{
