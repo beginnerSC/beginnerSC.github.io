@@ -18,7 +18,8 @@ function Launch()
 	
 	// token is encrypted like this: CryptoJS.AES.encrypt(MY_TOKEN, MY_PASSWORD);
 
-	var token = CryptoJS.AES.decrypt("U2FsdGVkX1/3oBBZJXnAVzFm0dbx2aUrpReU1i3v1iSPqgtlaxz+7EqfuIGFu9SQLMepQZnmOd4XZXy0Atp0Qw==", password);
+	var decrypted = CryptoJS.AES.decrypt("U2FsdGVkX1/3oBBZJXnAVzFm0dbx2aUrpReU1i3v1iSPqgtlaxz+7EqfuIGFu9SQLMepQZnmOd4XZXy0Atp0Qw==", password)
+	var token = decrypted.toString(CryptoJS.enc.Utf8);
 
 	var url = "https://mybinder.org/v2/gh/" 
 		+ id + "/" + sandbox 
@@ -40,6 +41,7 @@ function Launch()
 <table border=0>
 <tr>
 <td>Repository name</td>
+
 <td><input name="repoName" value=""></td>
 </tr>
 <tr>
