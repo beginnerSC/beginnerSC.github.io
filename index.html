@@ -8,48 +8,78 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 
+
+var id = "beginnerSC";
+var sandbox = "sandbox-stable";
+
+
 function Launch()
 {
-	var id = "beginnerSC";
-	var sandbox = "sandbox-stable";
+	var repoName = document.isForm.repoName.value;
+	var repoType = document.isForm.repoType.value;
 
-	var repoName= document.isForm.repoName.value;
-	var password = document.isForm.password.value;
-	
-	// token is encrypted like this: CryptoJS.AES.encrypt(MY_TOKEN, MY_PASSWORD);
+	if (repoType=="Public")
+	{
+		var url = "https://mybinder.org/v2/gh/" 
+			+ id + "/" + sandbox + 
+			"/master?urlpath=git-pull?repo=https://github.com/" 
+			+ id + "/" + repoName + 
+			"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/misc?Fautodecode";
+	} 
+	else if (repoType=="Private")
+	{
+		// Private repo needs password to launch
+		// The encreypted token below is from: alert(CryptoJS.AES.encrypt(MY_TOKEN, MY_PASSWORD));
 
-	var decrypted = CryptoJS.AES.decrypt("U2FsdGVkX1/3oBBZJXnAVzFm0dbx2aUrpReU1i3v1iSPqgtlaxz+7EqfuIGFu9SQLMepQZnmOd4XZXy0Atp0Qw==", password)
-	var token = decrypted.toString(CryptoJS.enc.Utf8);
+		var password = document.isForm.password.value;	
+		var decrypted = CryptoJS.AES.decrypt("U2FsdGVkX1/3oBBZJXnAVzFm0dbx2aUrpReU1i3v1iSPqgtlaxz+7EqfuIGFu9SQLMepQZnmOd4XZXy0Atp0Qw==", password)
+		var token = decrypted.toString(CryptoJS.enc.Utf8);
 
-	var url = "https://mybinder.org/v2/gh/" 
-		+ id + "/" + sandbox 
-		+ "/master?urlpath=git-pull?repo=https://" 
-		+ token 
-		+ "@github.com/" 
-		+ id + "/" + repoName
-		+ "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
-		+ repoName + "?autodecode";
-
+		var url = "https://mybinder.org/v2/gh/" 
+			+ id + "/" + sandbox 
+			+ "/master?urlpath=git-pull?repo=https://" 
+			+ token 
+			+ "@github.com/" 
+			+ id + "/" + repoName
+			+ "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
+			+ repoName + "?autodecode";
+	}
 	window.open(url, "_self"); 
 }
+
+
+function change(repoType) {
+	if (repoType.value === "Public") {
+		document.isForm.password.disabled = true;
+	} else {
+		document.isForm.password.disabled = false;
+	}
+}
+
 </script>
 <center>
 
+
 <form name="isForm">
 <p><B>Launch in a Could Workspace</B></p>
-
 <table border=0>
 <tr>
+<td>Repository type</td>
+<td>	<select name="repoType" size=1 onchange="change(this)">
+	<option value="Private">Private</option>
+	<option value="Public">Public</option>
+	</select>
+</td>
+</tr>
+<tr>
 <td>Repository name</td>
-
 <td><input name="repoName" value=""></td>
 </tr>
 <tr>
 <td>Github password</td>
-<td><input type="password", name="password" value=""></td>
+<td><input type="password", name="password" value="" disabled=false></td>
 </tr>
 </table>						
-
 <p>
 <input type=button name="go" value="Launch" onClick="Launch();return true;">
 </p>					
