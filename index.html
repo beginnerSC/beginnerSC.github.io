@@ -13,7 +13,13 @@ var id = "beginnerSC";
 var sandbox = "sandbox-stable";
 
 
-function Launch()
+function LaunchEmpty()
+{
+	var url = "https://mybinder.org/v2/gh/" + id + "/" + sandbox + "/master?urlpath=lab";
+	window.open(url, "_self"); 
+}
+	
+function LaunchPull()
 {
 	var repoName = document.isForm.repoName.value;
 	var repoType = document.isForm.repoType.value;
@@ -59,8 +65,7 @@ function change(repoType) {
 
 </script>
 <center>
-
-
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <form name="isForm">
 <p><B>Launch in a Could Workspace</B></p>
 <table border=0>
@@ -82,7 +87,8 @@ function change(repoType) {
 </tr>
 </table>						
 <p>
-<input type=button name="go" value="Launch" onClick="Launch();return true;">
+<input type=button name="lp" value="Launch and Pull" onClick="LaunchPull();return true;">
+<input type=button name="le" value="Launch Empty" onClick="LaunchEmpty();return true;">
 </p>					
 </form>
 
