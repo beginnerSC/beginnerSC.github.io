@@ -1,4 +1,4 @@
-# Cloud JupyterLab Workspace Launcher
+# [Cloud JupyterLab Workspace Launcher](https://beginnersc.github.io/)
 
 * Public: Open the link with nbgitpuller without a token
 * Private: Open with a token; so the Private option can actually be used to open public projects too
