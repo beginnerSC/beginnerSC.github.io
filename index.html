@@ -22,21 +22,13 @@ function LaunchEmpty()
 function LaunchPull()
 {
 	var repoName = document.isForm.repoName.value;
-	var repoType = document.isForm.repoType.value;
+	var useToken = document.isForm.useToken.checked;
 
-	if (repoType=="Public")
-	{
-		var url = "https://mybinder.org/v2/gh/" 
-			+ id + "/" + sandbox + 
-			"/master?urlpath=git-pull?repo=https://github.com/" 
-			+ id + "/" + repoName + 
-			"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/"
-			+ repoName + "?autodecode";
-	} 
-	else if (repoType=="Private")
+	if (useToken == true)
 	{
 		// Private repo needs password to launch
 		// The encreypted token below is from: alert(CryptoJS.AES.encrypt(MY_TOKEN, MY_PASSWORD));
+
 
 		var password = document.isForm.password.value;	
 		var decrypted = CryptoJS.AES.decrypt("U2FsdGVkX1/3oBBZJXnAVzFm0dbx2aUrpReU1i3v1iSPqgtlaxz+7EqfuIGFu9SQLMepQZnmOd4XZXy0Atp0Qw==", password)
@@ -51,15 +43,25 @@ function LaunchPull()
 			+ "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
 			+ repoName + "?autodecode";
 	}
+	else
+	{
+		var url = "https://mybinder.org/v2/gh/" 
+			+ id + "/" + sandbox + 
+			"/master?urlpath=git-pull?repo=https://github.com/" 
+			+ id + "/" + repoName + 
+			"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/"
+			+ repoName + "?autodecode";
+	} 
 	window.open(url, "_self"); 
 }
 
 
-function change(repoType) {
-	if (repoType.value === "Public") {
-		document.isForm.password.disabled = true;
-	} else {
+function change(useToken) {
+	if (useToken.checked) {
 		document.isForm.password.disabled = false;
+	} else {
+		document.isForm.password.value = "";
+		document.isForm.password.disabled = true;
 	}
 }
 
@@ -70,12 +72,8 @@ function change(repoType) {
 <p><B>Launch in a Could Workspace</B></p>
 <table border=0>
 <tr>
-<td>Repository type</td>
-<td>	<select name="repoType" size=1 onchange="change(this)">
-	<option value="Private">Private</option>
-	<option value="Public">Public</option>
-	</select>
-</td>
+<td>Launch with password</td>
+<td><input type="checkbox" name="useToken" onchange="change(this)" checked></td>
 </tr>
 <tr>
 <td>Repository name</td>
@@ -85,7 +83,7 @@ function change(repoType) {
 <td>Github password</td>
 <td><input type="password", name="password" value=""></td>
 </tr>
-</table>						
+</table>	
 <p>
 <input type=button name="lp" value="Launch and Pull" onClick="LaunchPull();return true;">
 <input type=button name="le" value="Launch Empty" onClick="LaunchEmpty();return true;">
