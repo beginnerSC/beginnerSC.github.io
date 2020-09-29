@@ -11,7 +11,13 @@
 
 var id = "beginnerSC";
 var sandbox = "sandbox-stable";
+var sandboxLatex = "sandbox-latex";
 
+function LaunchLaTeX()
+{
+	var url = "https://mybinder.org/v2/gh/" + id + "/" + sandboxLatex + "/master?urlpath=lab";
+	window.open(url, "_self"); 
+}
 
 function LaunchEmpty()
 {
@@ -87,7 +93,8 @@ function change(useToken) {
 <p>
 <input type=button name="lp" value="Launch and Pull" onClick="LaunchPull();return true;">
 <input type=button name="le" value="Launch Empty" onClick="LaunchEmpty();return true;">
-</p>					
+</p>
+<p><input type=button name="lpdf" value="Launch Empty with LaTeX" onClick="LaunchLaTeX();return true;"></p>
 </form>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
  
