@@ -6,5 +6,6 @@
    * The advantage opening public projects with a token is that when pushing code change back to GitHub there is no need to type in ID and password
 * If Launch Empty, all input fields will be ignored
 * Things to look out for: 
+  * Repository name is NOT case sensitive
   * This launcher can only pull repositories from this account because GitHub ID is hard coded in the url. To pull from other accounts, use [yc14e.github.io](https://yc14e.github.io/) instead
   * The repository to be pulled must have a master branch. A "main" branch or anything else wouldn't work. Pulling master branch is hard coded in this launcher as of now
