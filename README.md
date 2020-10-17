@@ -8,4 +8,3 @@
 * Things to look out for: 
   * Repository name is not case sensitive, but the folder pulled will have the same name and case as input
   * This launcher can only pull repositories from this account because GitHub ID is hard coded in the url. To pull from other accounts, use [yc14e.github.io](https://yc14e.github.io/) instead
-  * The repository to be pulled must have a master branch. A "main" branch or anything else wouldn't work. Pulling master branch is hard coded in this launcher as of now
