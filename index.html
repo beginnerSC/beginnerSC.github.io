@@ -10,19 +10,51 @@
 
 
 var id = "beginnerSC";
-var sandbox = "sandbox-stable";
-var sandboxLatex = "sandbox-latex";
 
 function LaunchEmpty()
 {
-	var url = "https://mybinder.org/v2/gh/" + id + "/" + sandbox + "/master?urlpath=lab";
+	var sandbox  = document.isForm.sandbox.value;
+	var appIdx   = document.isForm.app.selectedIndex;
+	var app      = "lab/";
+
+	switch(appIdx)
+	{
+	case 0: 
+		app = "?urlpath=lab";
+		break;
+	case 1: 
+		app = "";
+		break;
+	case 2: 
+		app = "?urlpath=voila";
+		break;
+	}
+
+	var url = "https://mybinder.org/v2/gh/" + id + "/" + sandbox + "/master" + app;
 	window.open(url, "_self"); 
 }
 	
 function LaunchPull()
 {
-	var repoName = document.isForm.repoName.value;
 	var useToken = document.isForm.useToken.checked;
+	var sandbox  = document.isForm.sandbox.value;
+	var repoName = document.isForm.repoName.value;
+	var branch   = document.isForm.branch.value;
+	var appIdx   = document.isForm.app.selectedIndex;
+	var app      = "lab/";
+
+	switch(appIdx)
+	{
+	case 0: 
+		app = "lab/";
+		break;
+	case 1: 
+		app = "";
+		break;
+	case 2: 
+		app = "voila/";
+		break;
+	}
 
 	if (useToken == true)
 	{
@@ -31,7 +63,7 @@ function LaunchPull()
 
 
 		var password = document.isForm.password.value;	
-		var decrypted = CryptoJS.AES.decrypt("U2FsdGVkX1/3oBBZJXnAVzFm0dbx2aUrpReU1i3v1iSPqgtlaxz+7EqfuIGFu9SQLMepQZnmOd4XZXy0Atp0Qw==", password)
+		var decrypted = CryptoJS.AES.decrypt("U2FsdGVkX1/Y1GbP5m08Tidy6FrqaW9tUohGIj/wq2xZessH24rV6ege5zDApQ8tERi+lSwuL+gPKSDijriXiw==", password)
 		var token = decrypted.toString(CryptoJS.enc.Utf8);
 
 		var url = "https://mybinder.org/v2/gh/" 
@@ -40,7 +72,9 @@ function LaunchPull()
 			+ token 
 			+ "@github.com/" 
 			+ id + "/" + repoName
-			+ "%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/" 
+			+ "%26amp%3Bbranch=" 
+			+ branch + "%26amp%3Burlpath=" 
+			+ app + "tree/" 
 			+ repoName + "?autodecode";
 	}
 	else
@@ -49,14 +83,16 @@ function LaunchPull()
 			+ id + "/" + sandbox + 
 			"/master?urlpath=git-pull?repo=https://github.com/" 
 			+ id + "/" + repoName + 
-			"%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/"
+			"%26amp%3Bbranch="
+			+ branch + "%26amp%3Burlpath=" 
+			+ app + "tree/"
 			+ repoName + "?autodecode";
 	} 
 	window.open(url, "_self"); 
 }
 
 
-function change(useToken) {
+function useTokenChange(useToken) {
 	if (useToken.checked) {
 		document.isForm.password.disabled = false;
 	} else {
@@ -65,19 +101,45 @@ function change(useToken) {
 	}
 }
 
+function repoNameChange() {
+
+	var repoName = document.isForm.repoName.value;
+
+	if (repoName == "") {
+		document.isForm.lp.disabled = true;
+	} else {
+		document.isForm.lp.disabled = false;
+	}
+}
+
 </script>
 <center>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <form name="isForm">
-<p><B>Launch JupyterLab and Pull Repository</B></p>
+<p><B>Launch and Pull Repository</B></p>
 <table border=0>
 <tr>
 <td>Launch with password</td>
-<td><input type="checkbox" name="useToken" onchange="change(this)" checked></td>
+<td><input type="checkbox" name="useToken" onchange="useTokenChange(this)" checked></td>
+</tr>
+<td>Launch</td>
+<td><select name="app", value="JupyterLab">
+	<option>JupyterLab</option>
+	<option>Classic Jupyter Notebook</option>
+	<option>Voilà</option>
+</select> 
+</td>
+<tr>
+<td>Sandbox</td>
+<td><input name="sandbox" value="sandbox-stable"></td>
 </tr>
 <tr>
 <td>Repository name</td>
-<td><input name="repoName" value=""></td>
+<td><input name="repoName" value="" onchange="repoNameChange()"></td>
+</tr>
+<tr>
+<td>Branch</td>
+<td><input name="branch" value="master"></td>
 </tr>
 <tr>
 <td>Github password</td>
@@ -85,7 +147,7 @@ function change(useToken) {
 </tr>
 </table>	
 <p>
-<input type=button name="lp" value="Launch and Pull" onClick="LaunchPull();return true;">
+<input type=button name="lp" value="Launch and Pull" onClick="LaunchPull();return true;" disabled=true>
 <input type=button name="le" value="Launch Empty" onClick="LaunchEmpty();return true;">
 </p>
 </form>
