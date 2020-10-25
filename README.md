@@ -7,4 +7,4 @@
 * If Launch Empty, all input fields will be ignored
 * Things to look out for: 
   * Repository name is not case sensitive, but the folder pulled will have the same name and case as input
-  * This launcher can only pull repositories from this account because GitHub ID is hard coded in the url. To pull from other accounts, use [yc14e.github.io](https://yc14e.github.io/) instead
+  * This launcher can only pull repositories from this account because GitHub ID is hard coded in the url. To pull from other accounts, use [this launcher](https://yc14e.github.io/jupyterlab-launcher/) instead
